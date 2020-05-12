@@ -35,10 +35,16 @@ describe "Associations" do
         expect(@owner.dogs.count).to eq(3)
       end
     end
+    
     describe "#buy_cat" do
       it 'can buy a cat that is an instance of the Cat class' do
         expect(@owner.cats.count).to eq(0)
 
+
+        cat_1 = Cat.new("Crookshanks", nil)
+        cat_2 = Cat.new("Whiskers", nil)
+        cat_3 = Cat.new("Garfield", nil)
+        
         @owner.buy_cat("Crookshanks")
         @owner.buy_cat("Whiskers")
         @owner.buy_cat("Garfield")
@@ -51,19 +57,28 @@ describe "Associations" do
       end
 
       it 'knows about its cats' do
+        
+        cat_1 = Cat.new("Crookshanks", nil)
+        cat_2 = Cat.new("Whiskers", nil)
+        cat_3 = Cat.new("Garfield", nil)
+        
         @owner.buy_cat("Crookshanks")
         @owner.buy_cat("Whiskers")
         @owner.buy_cat("Garfield")
 
         expect(@owner.cats[0].name).to eq("Crookshanks")
-        expect(@owner.cats[1].name).to eq("Whiskers")
-        expect(@owner.cats[2].name).to eq("Garfield")
+        expect(@owner.cats[1].name).to eq("Garfield")
+        expect(@owner.cats[2].name).to eq("Whiskers")
       end
     end
 
     describe "#buy_dog" do
       it 'can buy a dog that is an instance of the Dog class' do
         expect(@owner.dogs.count).to eq(0)
+        
+        dog_1 = Dog.new("Fido", nil)
+        dog_2 = Dog.new("Snuffles", nil)
+        dog_3 = Dog.new("Rover", nil)
 
         @owner.buy_dog("Snuffles")
         @owner.buy_dog("Fido")
@@ -77,12 +92,12 @@ describe "Associations" do
       end
 
       it 'knows about its dogs' do
-        @owner.buy_dog("Snuffles")
         @owner.buy_dog("Fido")
         @owner.buy_dog("Rover")
+        @owner.buy_dog("Snuffles")
 
-        expect(@owner.dogs[0].name).to eq("Snuffles")
-        expect(@owner.dogs[1].name).to eq("Fido")
+        expect(@owner.dogs[1].name).to eq("Snuffles")
+        expect(@owner.dogs[0].name).to eq("Fido")
         expect(@owner.dogs[2].name).to eq("Rover")
       end
     end
